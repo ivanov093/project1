@@ -19,12 +19,12 @@ using namespace std;
 int main() {
 
   string_vector slogan = { "titans", "reach", "higher" };
-  
+
   string_vector animals = {
     "dog", "cat", "mouse", "rat", "horse", "cow", "pig", "donkey", "penguin",
     "grouse", "rabbit", "catamount", "moose"
   };
-  
+
   string_vector words_txt;
   bool load_words_ok = load_words(words_txt, "words.txt");
 
@@ -71,7 +71,8 @@ int main() {
 		     TEST_FALSE("false: not even close", is_substring("ratamacue", "horseradish"));
 		     TEST_FALSE("false: close call", is_substring("radix", "horseradish"));
 		   });
-  
+
+
   rubric.criterion("character_mode(...)", 2,
 		   [&]() {
 		     TEST_EQUAL("slogan", 'h', character_mode(slogan));
@@ -79,19 +80,6 @@ int main() {
 		     TEST_EQUAL("words.txt", 's', character_mode(words_txt));
 		   });
 
-  rubric.criterion("longest_mirrored_string(...)", 2,
-		   [&]() {
-		     TEST_EQUAL("not found: slogan", "", longest_mirrored_string(slogan));
-		     TEST_EQUAL("not found: animals", "", longest_mirrored_string(animals));
-		     // words.txt takes too long
-
-		     string_vector has_mirrored = {
-		       "mink", "ferret", "owl", "eagle",
-		       "knim", "terref", "low", "elgae"
-		     };
-		     string result = longest_mirrored_string(has_mirrored);
-		     TEST_TRUE("found", (result == "ferret") || (result == "terref"));
-		   });
 
   rubric.criterion("longest_mirrored_string(...)", 2,
 		   [&]() {
@@ -106,7 +94,21 @@ int main() {
 		     string result = longest_mirrored_string(has_mirrored);
 		     TEST_TRUE("found", (result == "ferret") || (result == "terref"));
 		   });
-  
+
+  rubric.criterion("longest_mirrored_string(...)", 2,
+		   [&]() {
+		     TEST_EQUAL("not found: slogan", "", longest_mirrored_string(slogan));
+		     TEST_EQUAL("not found: animals", "", longest_mirrored_string(animals));
+		     // words.txt takes too long
+
+		     string_vector has_mirrored = {
+		       "mink", "ferret", "owl", "eagle",
+		       "knim", "terref", "low", "elgae"
+		     };
+		     string result = longest_mirrored_string(has_mirrored);
+		     TEST_TRUE("found", (result == "ferret") || (result == "terref"));
+		   });
+
   rubric.criterion("longest_substring_trio(...)", 2,
 		   [&]() {
 		     string_vector trio;
